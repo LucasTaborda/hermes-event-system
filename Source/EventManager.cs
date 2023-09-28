@@ -38,15 +38,18 @@ namespace Hermes
             if (_listeners.ContainsKey(eventName))
             {
                 _listeners[eventName].Remove(listener);
+
+                if (_listeners[eventName].Count == 0)
+                    _listeners.Remove(eventName);
             }
         }
 
 
-        public void DispatchEvent<T>(string name, EventData<T> data)
+        public void DispatchEvent<T>(string eventName, EventData<T> data)
         {
-            if (!_listeners.ContainsKey(name)) return;
+            if (!_listeners.ContainsKey(eventName)) return;
 
-            foreach (var listener in _listeners[name])
+            foreach (var listener in _listeners[eventName])
             {
                 if (listener is Action<EventData<T>> typedListener)
                 {
@@ -55,5 +58,4 @@ namespace Hermes
             }
         }
     }
-
 }

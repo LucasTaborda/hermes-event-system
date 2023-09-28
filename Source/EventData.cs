@@ -1,9 +1,12 @@
-public class EventData<T>
+namespace Hermes
 {
-    public T data;
-
-    public EventData(T data)
+    public class EventData<T>
     {
-        this.data = data;
+        public T data;
+
+        public EventData(T data)
+        {
+            this.data = data;
+        }
     }
 }
