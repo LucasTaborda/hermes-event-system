@@ -8,9 +8,9 @@ public class TestEventSystem : MonoBehaviour
 
     void Start()
     {
-        listener = EventListener; //Le asigno el nombre de la función
+        listener = MyEventListener; //Le asigno al delegado el método en cuestión
 
-        EventManager.Instance.AddEventListener("On Hi", listener); //Comienzo a escuchar el evento "On Hi" y le digo al manager qué función quiero que se ejecute cuando se dispare.
+        EventManager.Instance.AddEventListener("On 3 Seconds", listener); //Comienzo a escuchar el evento "On 3 Seconds" y le digo al manager qué método quiero que se ejecute cuando se dispare.
 
         Invoke("DispatchEventString", 3); //Hago que se dispare un evento en 3 segundos.
     }
@@ -18,21 +18,21 @@ public class TestEventSystem : MonoBehaviour
 
     private void DispatchEventString()
     {
-        var hi = new EventData<string>("ola k ase"); //El evento tiene el string "ola k ase" como dato
+        var message = new EventData<string>("El evento fue disparado"); //El evento enviará este string como parámetro
 
-        EventManager.Instance.DispatchEvent("On Hi", hi); //Disparo el evento y envió el dato a todas las funciones suscriptas.
+        EventManager.Instance.DispatchEvent("On 3 Seconds", message); //Disparo el evento y envio el dato a todas los métodos suscriptos.
     }
 
 
-    private void EventListener(EventData<string> message) //La función que se ejecuta al dispararse el evento
+    private void MyEventListener(EventData<string> message) //La función que se ejecuta al dispararse el evento
     {
-        Debug.Log(message.data); //Imprimo el dato que me trajo el evento
+        Debug.Log($"Evento 'On 3 Seconds' escuchado. Envió este mensaje: '{message.data}'"); //Imprimo el dato que me trajo el evento
 
-        Invoke("RemoveEventListener", 1); //Borro la suscripción al evento en 1 segundo. No lo puedo borrar inmediatamente porque está recorriendo la lista de funciones y se rompería el proceso.
+        Invoke("RemoveMyEventListener", 1); //Borro la suscripción al evento en 1 segundo. No lo puedo borrar inmediatamente porque está recorriendo la lista de métodos y se rompería el proceso.
     }
 
-    private void RemoveEventListener()
+    private void RemoveMyEventListener()
     {
-        EventManager.Instance.RemoveEventListener("On Hi", listener); //Se borra el listener.
+        EventManager.Instance.RemoveEventListener("On 3 Seconds", listener); //Se borra el listener.
     }
 }
