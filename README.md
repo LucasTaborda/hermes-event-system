@@ -11,34 +11,34 @@
 
 &nbsp;
 
-## Cómo se utiliza (Ejemplo con un evento que envía texto)
+## Cómo se utiliza (Ejemplo con un evento que envía un string saludando)
 
-1. Creas el método que quieres que se ejecute al dispararse un evento:
+1. En el momento y lugar que quieras que se dispare el evento, agregas este código. (El evento puede llamarse como quieras. Yo a este lo llamé "On Saludar").
 
 ```cs
-private void MetodoSuscripto(EventData<string> mensaje)
+var miSaludo = new EventData<string>("Hola"); //Dato que envía el evento. Yo necesito enviar un string que saluda. Así que declaro un EventData de tipo string.
+EventManager.Instance.DispatchEvent("On Saludar", miSaludo);
+```
+
+&nbsp;
+
+2. En el objeto que quieras que haga algo cuando se dispare el evento, creas el método que se usará como delegado. Debe recibir como parámetro un EventData.
+
+```cs
+private void MetodoSuscripto(EventData<string> datoRecibidoDelEvento)
 {
-    Debug.log(mensaje.data);
+    Debug.log(datoRecibidoDelEvento.data);
 }
 ```
 
 &nbsp; 
  
-2. Suscribes la función al evento que quieres que se dispare
+3. Suscribes el método al evento. El delegado debe ser declarado como un `Action<EventData<T>>`, siendo T el tipo de dato que necesitamos enviar desde el evento (En este caso un string).
 
 ```cs
 Action<EventData<string>> suscriptor = MetodoSuscripto;
 EventManager.Instance.AddEventListener("On Saludar", suscriptor);
-```
-
-&nbsp;
- 
-3. En el momento y lugar que quieras que se dispare el evento, agregas este código:
-
-```cs
-var miSaludo = new EventData<string>("Hola");
-EventManager.Instance.DispatchEvent("On Saludar", miSaludo);
-```
+``` 
 
 &nbsp;
  
