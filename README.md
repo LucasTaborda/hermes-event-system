@@ -50,12 +50,12 @@ EventManager.Instance.RemoveEventListener("On Saludar", suscriptor);
 
 &nbsp;
 
-**_Para ver un ejemplo completo del sistema funcionando, en la carpeta_ Example _hay una implementación del mismo._**
+**_Para ver un ejemplo completo del sistema funcionando, en la carpeta_ Example _hay una escena con la implementación del mismo. (Si al abrir la escena el game object Test perdió la referencia al script, agrégale el componente TestEventSystem que está dentro de la carpeta Example)._**
 
 &nbsp;
 
 ## Aclaraciones
 
-1. Los delegados que se suscriben a los eventos pueden recibir un parámetro solo del tipo genérico EventData. Pero al ser genérico, puedes recibir cualquier tipo de dato especificándolo en la T: EventData<T>
-2. Si necesitas recibir más de un dato como parámetro, puedes crear un ObjetoCustom que tenga todos los datos que necesitas. Posteriormente creas un delegado que reciba como parámetro un EventData<ObjetoCustom>
+1. Los delegados que se suscriben a los eventos solo pueden recibir un parámetro del tipo EventData. Pero al ser genérico, puedes recibir cualquier tipo de dato especificándolo en la instanciación del `EventData<T>`
+2. Si necesitas recibir más de un dato como parámetro, puedes crear un ObjetoCustom que tenga todos los datos que necesitas. Posteriormente creas un delegado que reciba como parámetro un `EventData<ObjetoCustom>`
 3. No se puede desuscribir a un evento al momento de ser despachado. Debe ser después de que termine de llamar a todos los suscriptores.
