@@ -12,6 +12,8 @@ public class TestEventSystem : MonoBehaviour
 
         EventManager.Instance.AddEventListener("On 3 Seconds", listener); //Comienzo a escuchar el evento "On 3 Seconds" y le digo al manager qué método quiero que se ejecute cuando se dispare.
 
+        Debug.Log($"{gameObject.name}: Me suscribí al evento 'On 3 Seconds'");
+
         Invoke("DispatchEventString", 3); //Hago que se dispare un evento en 3 segundos.
     }
 
@@ -26,7 +28,7 @@ public class TestEventSystem : MonoBehaviour
 
     private void MyEventListener(EventData<string> message) //La función que se ejecuta al dispararse el evento
     {
-        Debug.Log($"Evento 'On 3 Seconds' escuchado. Envió este mensaje: '{message.data}'"); //Imprimo el dato que me trajo el evento
+        Debug.Log($"{gameObject.name}: Evento 'On 3 Seconds' escuchado. Envió este mensaje: '{message.data}'"); //Imprimo el dato que me trajo el evento
 
         Invoke("RemoveMyEventListener", 1); //Borro la suscripción al evento en 1 segundo. No lo puedo borrar inmediatamente porque está recorriendo la lista de métodos y se rompería el proceso.
     }
@@ -34,5 +36,7 @@ public class TestEventSystem : MonoBehaviour
     private void RemoveMyEventListener()
     {
         EventManager.Instance.RemoveEventListener("On 3 Seconds", listener); //Se borra el listener.
+
+        Debug.Log($"{gameObject.name}: Me desuscribí al evento 'On 3 Seconds'");
     }
 }
