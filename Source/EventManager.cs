@@ -5,24 +5,10 @@ namespace Hermes
 {
     public class EventManager
     {
-        private Dictionary<string, List<Delegate>> _listeners = new();
-
-        private static EventManager _instance;
-
-        public static EventManager Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new EventManager();
-                return _instance;
-            }
-        }
+        private static Dictionary<string, List<Delegate>> _listeners = new();
 
 
-        private EventManager() { }
-
-
-        public void AddEventListener<T>(string eventName, Action<EventData<T>> listener)
+        public static void AddEventListener<T>(string eventName, Action<EventData<T>> listener)
         {
             if (!_listeners.ContainsKey(eventName))
             {
@@ -33,7 +19,7 @@ namespace Hermes
         }
 
 
-        public void RemoveEventListener<T>(string eventName, Action<EventData<T>> listener)
+        public static void RemoveEventListener<T>(string eventName, Action<EventData<T>> listener)
         {
             if (_listeners.ContainsKey(eventName))
             {
@@ -45,7 +31,7 @@ namespace Hermes
         }
 
 
-        public void DispatchEvent<T>(string eventName, EventData<T> data)
+        public static void DispatchEvent<T>(string eventName, EventData<T> data)
         {
             if (!_listeners.ContainsKey(eventName)) return;
 
