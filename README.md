@@ -17,7 +17,7 @@
 
 ```cs
 var miSaludo = new EventData<string>("Hola"); //Dato que envía el evento. Yo necesito enviar un string que saluda. Así que declaro un EventData de tipo string.
-EventManager.Instance.DispatchEvent("On Saludar", miSaludo);
+EventManager.DispatchEvent("On Saludar", miSaludo);
 ```
 
 &nbsp;
@@ -27,7 +27,7 @@ EventManager.Instance.DispatchEvent("On Saludar", miSaludo);
 ```cs
 private void MetodoSuscripto(EventData<string> datoRecibidoDelEvento)
 {
-    Debug.log(datoRecibidoDelEvento.data);
+    Debug.Log(datoRecibidoDelEvento.data);
 }
 ```
 
@@ -37,7 +37,7 @@ private void MetodoSuscripto(EventData<string> datoRecibidoDelEvento)
 
 ```cs
 Action<EventData<string>> suscriptor = MetodoSuscripto;
-EventManager.Instance.AddEventListener("On Saludar", suscriptor);
+EventManager.AddEventListener("On Saludar", suscriptor);
 ``` 
 
 &nbsp;
@@ -45,7 +45,7 @@ EventManager.Instance.AddEventListener("On Saludar", suscriptor);
 4. Finalmente, si quieres dejar de escuchar ese evento, agregas este código:
 
 ```cs
-EventManager.Instance.RemoveEventListener("On Saludar", suscriptor);
+EventManager.RemoveEventListener("On Saludar", suscriptor);
 ```
 
 &nbsp;
