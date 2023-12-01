@@ -59,3 +59,4 @@ EventManager.RemoveEventListener("On Saludar", suscriptor);
 1. Los delegados que se suscriben a los eventos solo pueden recibir un parámetro del tipo EventData. Pero al ser genérico, puedes recibir cualquier tipo de dato especificándolo en la instanciación del `EventData<T>`
 2. Si necesitas recibir más de un dato como parámetro, puedes crear un ObjetoCustom que tenga todos los datos que necesitas. Posteriormente creas un delegado que reciba como parámetro un `EventData<ObjetoCustom>`
 3. No se puede desuscribir a un evento al momento de ser despachado. Debe ser después de que termine de llamar a todos los suscriptores.
+4. Ahora se pueden enviar y recibir eventos con callbacks sin parámetros. Solo hay que utilizar `AddEventListener`, `RemoveEventListener` Y `DispatchEvent` enviando como parámetro únicamente el nombre del evento y el método callback de ser necesario.
